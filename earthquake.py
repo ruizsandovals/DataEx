@@ -1,14 +1,10 @@
 import urllib.request  # instead of urllib2 like in Python 2.7
 import json
-import pandas as pd
-from datetime import date, datetime, time, timedelta
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from tkinter import filedialog
 from pickle import *
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 
 #
@@ -16,7 +12,7 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 # Date  : 04/10/2020
 #
 
-class EarthquakeInfo():
+class EarthquakeInfo:
 
     def __init__(self, master):
         self.root = master
@@ -52,7 +48,9 @@ class EarthquakeInfo():
 
         # Labels
         # Window Header
-        ttk.Label(self.w_quake, text="USGS Magnitude 2.5+ Earthquakes", style='Header.TLabel').grid(row=0, column=0, columnspan=6, pady=25)
+        ttk.Label(self.w_quake, text="USGS Magnitude 2.5+ Earthquakes", style='Header.TLabel').grid(row=0, column=0,
+                                                                                                    columnspan=6,
+                                                                                                    pady=25)
 
         # selected tree view item
         self.tree_item = ''
@@ -65,7 +63,8 @@ class EarthquakeInfo():
         # Dictionary
         root_dict = {}
 
-        filename = filedialog.askopenfilename(initialdir="/", title="Select file", filetypes=(("eq files", "*.eq"), ("all files", "*.*")))
+        filename = filedialog.askopenfilename(initialdir="/", title="Select file",
+                                              filetypes=(("eq files", "*.eq"), ("all files", "*.*")))
         self.w_quake.focus()
 
         # Open and read input file
@@ -92,10 +91,14 @@ class EarthquakeInfo():
                         self.tv_quake.insert('root', "end", location, text=location)
 
                     for details in root_dict[root]["children"][location]["children"]:
-                        self.tv_quake.insert(location, "end", details, text=root_dict[root]["children"][location]["children"][details]["text"])
-                        self.tv_quake.item(details, tags=root_dict[root]["children"][location]["children"][details]["tags"])
-                        self.tv_quake.set(details, 'magnitude', root_dict[root]["children"][location]["children"][details]["values"][0])
-                        self.tv_quake.set(details, 'felt', root_dict[root]["children"][location]["children"][details]["values"][1])
+                        self.tv_quake.insert(location, "end", details,
+                                             text=root_dict[root]["children"][location]["children"][details]["text"])
+                        self.tv_quake.item(details,
+                                           tags=root_dict[root]["children"][location]["children"][details]["tags"])
+                        self.tv_quake.set(details, 'magnitude',
+                                          root_dict[root]["children"][location]["children"][details]["values"][0])
+                        self.tv_quake.set(details, 'felt',
+                                          root_dict[root]["children"][location]["children"][details]["values"][1])
 
     # Save Treeview content
     def save_tv(self):
@@ -133,7 +136,8 @@ class EarthquakeInfo():
 
         # If there are element to save, ask for location
         if num_items > 0:
-            filename = filedialog.asksaveasfilename(initialdir="/", title="Select file", filetypes=(("eq files", "*.eq"), ("all files", "*.*")))
+            filename = filedialog.asksaveasfilename(initialdir="/", title="Select file",
+                                                    filetypes=(("eq files", "*.eq"), ("all files", "*.*")))
             if filename != "":
                 try:
                     if filename.find(".") == -1:

@@ -1,18 +1,11 @@
-import urllib.request  # instead of urllib2 like in Python 2.7
-import json
-import pandas as pd
-from datetime import date, datetime, time, timedelta
 from tkinter import *
 from tkinter import ttk
-from tkinter import messagebox
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 
 from corona import CoronaInfo
 from earthquake import EarthquakeInfo
 
 
-class DataStructures():
+class DataStructures:
 
     def __init__(self):
         self.root = Tk()  # Main window
